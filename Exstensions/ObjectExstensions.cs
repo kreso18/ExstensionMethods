@@ -1,11 +1,37 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Exstensions
 {
     public static class ObjectExstensions
     {
+        /// <summary>
+        /// Check if value is null.
+        /// Replacement for (value == null)
+        /// </summary>
+        /// <returns>true if null, false if not.</returns>
+        public static bool IsNull<T>(this T value) where T : class => value == null;
+
+        /// <summary>
+        /// Check if value is NOT null.
+        /// </summary>
+        /// <returns>true if not null, false if is null.</returns>
+        public static bool IsNotNull<T>(this T @value) where T : class => value != null;
+
+        /// <summary>
+        /// Check if the object is equal to any of the given values.
+        /// Good replacement for if(myVar == "string1" || myVar == "straing2") => if(myVar.IsIn("string1", "string2"))
+        /// </summary>
+        /// <returns>true if the values list contains the object, otherwise false.</returns>
+        public static bool IsIn<T>(this T src, params T[] values)
+        {
+            if (null == src) throw new ArgumentNullException("source");
+            return values.Contains(src);
+        }
+
+
         /// <summary>
         /// Check if value is greater or equal than low value and smaller or equal than high value. [low, high]
         /// </summary>
