@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Exstensions.Tests
@@ -39,6 +40,24 @@ namespace Exstensions.Tests
             Assert.IsFalse(nullDatasetResult);
             Assert.IsFalse(emptyDatasetResult);
             Assert.IsTrue(notEmptyDatasetResult);
+        }
+
+        [TestMethod]
+        public void ForEach()
+        {
+            var square = new Func<int, int>(x => x * x);
+
+            int sum1 = 0;
+            int sum2 = 0;
+
+            IEnumerable<int> ints = new List<int> { 1, 2, 3, 4 }.AsEnumerable();
+
+            ints.ForEach(x => sum1 += x);
+            ints.ForEach(x => sum2 += square(x));
+
+            Assert.AreEqual(sum1, ints.Sum());
+            Assert.AreEqual(sum2, ints.Sum(x=>x*x));
+
         }
     }
 }

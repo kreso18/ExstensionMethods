@@ -26,5 +26,13 @@ namespace Exstensions
         {
             return src != null && src.Any();
         }
+
+        /// <summary>Enumerates (for each) over IEnumerable.</summary>
+        /// <returns>A foreach enumerator over IEnumerable collection.</returns>
+        public static void ForEach<T>(this IEnumerable<T> source, Action<T> action)
+        {
+            foreach (T obj in source)
+                action(obj);
+        }
     }
 }
