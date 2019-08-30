@@ -17,7 +17,6 @@ namespace Exstensions.Tests
             string test2 = "This is <<placeholder<> inside>>";
             string test3 = "This is empty placeholder <<>>";
             string test4 = "";
-            string test5 = "This is <<placeholder>>";
 
 
             string result1 = test1.GetBetween("<<", ">>"); // return "placeholder";

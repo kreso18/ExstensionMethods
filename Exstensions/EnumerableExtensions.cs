@@ -7,6 +7,13 @@ namespace Exstensions
 {
     public static class EnumerableExtensions
     {
+        /*
+       public int CompareTo (object obj);
+       Less than zero	    This instance precedes obj in the sort order.
+       Zero	                This instance occurs in the same position in the sort order as obj.
+       Greater than zero	This instance follows obj in the sort order.
+       */
+
         /// <summary>
         /// Check if collection is null or empty. Replacement for if(dateset == null || !dataset.Any())
         /// </summary>
@@ -34,5 +41,46 @@ namespace Exstensions
             foreach (T obj in source)
                 action(obj);
         }
+
+        /// <summary>
+        /// Get first item of sequence with minimum value by criterion
+        /// Can be used as replacement for sequence.OrderBy(...).First();
+        /// </summary>
+        /// <returns>First item of sequence with minimum value by given criterion</returns>
+        public static T WithMinimum<T, TKey>(this IEnumerable<T> sequence, Func<T, TKey> criterion)
+            where T : class
+            where TKey : IComparable<TKey>
+        {
+            //return sequence
+            //    .Aggregate((T)null, (best, cur) =>
+            //        best == null || criterion(cur).CompareTo(criterion(best)) < 0 ? cur : best);
+
+            return sequence
+                .Select(obj => Tuple.Create(obj, criterion(obj)))
+                .Aggregate((Tuple<T, TKey>)null,
+                    (best, current) => best == null || current.Item2.CompareTo(best.Item2) < 0 ? current : best)
+                .Item1;
+        }
+
+        /// <summary>
+        /// Get first item of sequence with minimum value by criterion
+        /// Can be used as replacement for sequence.OrderByDescending(...).First();
+        /// </summary>
+        /// <returns>First item of sequence with minimum value by given criterion</returns>
+        public static T WithMaximum<T, TKey>(this IEnumerable<T> sequence, Func<T, TKey> criterion)
+            where T : class
+            where TKey : IComparable<TKey>
+        {
+            //return sequence
+            //    .Aggregate((T)null, (best, cur) =>
+            //        best == null || criterion(cur).CompareTo(criterion(best)) > 0 ? cur : best);
+
+            return sequence
+                .Select(obj => Tuple.Create(obj, criterion(obj)))
+                .Aggregate((Tuple<T, TKey>)null,
+                    (best, current) => best == null || current.Item2.CompareTo(best.Item2) > 0 ? current : best)
+                .Item1;
+        }
+
     }
 }
