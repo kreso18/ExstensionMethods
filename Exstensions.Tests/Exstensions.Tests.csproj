@@ -52,6 +52,7 @@
     <Compile Include="EnumerableExtensionsTests.cs" />
     <Compile Include="ObjectExstensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StringExstensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

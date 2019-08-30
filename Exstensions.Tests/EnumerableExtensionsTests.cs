@@ -30,7 +30,7 @@ namespace Exstensions.Tests
         {
             IEnumerable<string> nullDataset = null;
             IEnumerable<string> emptyDataset = new List<string>();
-            IEnumerable<string> notEmptyDataset = new List<string> { "Fizz" };
+            IEnumerable<string> notEmptyDataset = new List<string> { "test" };
 
             bool nullDatasetResult = nullDataset.IsNotNullOrEmpty(); // return false;
             bool emptyDatasetResult = emptyDataset.IsNotNullOrEmpty(); // return false;
