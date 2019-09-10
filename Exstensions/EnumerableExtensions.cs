@@ -82,5 +82,23 @@ namespace Exstensions
                 .Item1;
         }
 
+        /// <summary>
+        /// Check if collection contains all given values
+        /// </summary>
+        /// <returns>True if collection contains all given values, false if not.</returns>
+        public static bool ContainsAll<T>(this IEnumerable<T> source, params T[] values)
+        {
+            return values.All(source.Contains);
+        }
+
+
+        /// <summary>
+        /// Check if collection contains any of given values
+        /// </summary>
+        /// <returns>True if collection contains any of given values, false if not.</returns>
+        public static bool ContainsAny<T>(this IEnumerable<T> source, params T[] values)
+        {
+            return values.Any(source.Contains);
+        }
     }
 }

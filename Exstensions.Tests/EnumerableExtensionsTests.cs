@@ -62,7 +62,7 @@ namespace Exstensions.Tests
         [TestMethod]
         public void WithMinimum()
         {
-            var squareOfThreeOrIntMax = new Func<int, int>(x => x == 3 ? x*x : int.MaxValue);
+            var squareOfThreeOrIntMax = new Func<int, int>(x => x == 3 ? x * x : int.MaxValue);
 
             var objects = new List<Tuple<int, string>>()
             {
@@ -106,7 +106,74 @@ namespace Exstensions.Tests
             Assert.AreEqual(max2.Item1, 3);
             Assert.AreEqual(max3.Item1, 3);
 
-            Assert.AreEqual(max1.Item1, objects.OrderByDescending(x=>x.Item1).First().Item1);
+            Assert.AreEqual(max1.Item1, objects.OrderByDescending(x => x.Item1).First().Item1);
+        }
+
+        [TestMethod]
+        public void ContainsAll()
+        {
+            IEnumerable<string> emptyDataset = new List<string>();
+            IEnumerable<string> stringDataset = new List<string> { "test1", "test2", "test3", "test4" };
+            IEnumerable<int> intDataset = new List<int> { 1, 2, 3, 4 };
+
+
+            bool emptyFalse = emptyDataset.ContainsAll("test1"); // return false;
+
+            bool stringTrue = stringDataset.ContainsAll("test1"); //return true 
+            bool stringTrue2 = stringDataset.ContainsAll("test1", "test2", "test3", "test4"); //return true 
+            bool stringFalse = stringDataset.ContainsAll("test1234"); //return false 
+            bool stringFalse2 = stringDataset.ContainsAll("test1", "test2", "test1234"); //return false 
+
+            bool intTrue = intDataset.ContainsAll(1); //return true 
+            bool intTrue2 = intDataset.ContainsAll(1, 2, 3, 4); //return true 
+            bool intFalse = intDataset.ContainsAll(1234); //return false 
+            bool intFalse2 = intDataset.ContainsAll(1, 2, 1234); //return false 
+
+
+            Assert.IsFalse(emptyFalse);
+            Assert.IsTrue(stringTrue);
+            Assert.IsTrue(stringTrue2);
+            Assert.IsFalse(stringFalse);
+            Assert.IsFalse(stringFalse2);
+            Assert.IsTrue(intTrue);
+            Assert.IsTrue(intTrue2);
+            Assert.IsFalse(intFalse);
+            Assert.IsFalse(intFalse2);
+        }
+
+        [TestMethod]
+        public void ContainsAny()
+        {
+            IEnumerable<string> emptyDataset = new List<string>();
+            IEnumerable<string> stringDataset = new List<string> { "test1", "test2", "test3", "test4" };
+            IEnumerable<int> intDataset = new List<int> { 1, 2, 3, 4 };
+
+
+            bool emptyFalse = emptyDataset.ContainsAny("test1"); // return false;
+
+            bool stringTrue = stringDataset.ContainsAny("test1"); //return true 
+            bool stringTrue2 = stringDataset.ContainsAny("test1", "test2", "test3", "test4"); //return true 
+            bool stringTrue3 = stringDataset.ContainsAny("test1", "test1234", "test3412", "test4123"); //return true 
+            bool stringFalse = stringDataset.ContainsAny("test1234"); //return false 
+            bool stringFalse2 = stringDataset.ContainsAny("test1234", "test2341", "test1234"); //return false 
+
+            bool intTrue = intDataset.ContainsAny(1); //return true 
+            bool intTrue2 = intDataset.ContainsAny(1, 2341, 3412, 4123); //return true 
+            bool intFalse = intDataset.ContainsAny(1234); //return false 
+            bool intFalse2 = intDataset.ContainsAny(1234, 2341, 1234); //return false 
+
+
+            Assert.IsFalse(emptyFalse);
+            Assert.IsTrue(stringTrue);
+            Assert.IsTrue(stringTrue2);
+            Assert.IsTrue(stringTrue3);
+            Assert.IsFalse(stringFalse);
+            Assert.IsFalse(stringFalse2);
+            Assert.IsTrue(intTrue);
+            Assert.IsTrue(intTrue2);
+            Assert.IsFalse(intFalse);
+            Assert.IsFalse(intFalse2);
+
         }
     }
 }
