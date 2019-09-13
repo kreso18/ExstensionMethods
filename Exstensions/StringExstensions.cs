@@ -1,11 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Exstensions
 {
     public static class StringExstensions
     {
+
+        /// <summary>
+        /// Check if given string is numeric
+        /// </summary>
+        /// <returns>True if string is numeric (only digits).</returns>
+
+
+        public static bool IsNumeric(this string @this)
+        {
+            return !Regex.IsMatch(@this, "[^0-9]");
+        }
+
+        public static int TryParseToIntOrDefault(this string input, int defaultValue = 0)
+        {
+            if (int.TryParse(input, out var value))
+            {
+                return value;
+            }
+
+            return defaultValue;
+        }
 
         /// <summary>
         /// Get the string between the two specified string.
