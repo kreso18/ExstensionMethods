@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BooleanExtensionsTests.cs" />
+    <Compile Include="DateTimeExstensionsTests.cs" />
     <Compile Include="EnumerableExtensionsTests.cs" />
     <Compile Include="ObjectExstensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

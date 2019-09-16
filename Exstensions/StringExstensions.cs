@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -28,6 +29,16 @@ namespace Exstensions
 
             return defaultValue;
         }
+
+        //public static double TryParseToDoubleOrDefault<T>(this string input, double defaultValue = default(double))
+        //{
+        //    if (double.TryParse(input, out var value))
+        //    {
+        //        return value;
+        //    }
+
+        //    return defaultValue;
+        //}
 
         /// <summary>
         /// Get the string between the two specified string.
