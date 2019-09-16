@@ -100,6 +100,10 @@ namespace Exstensions
             return values.Any(source.Contains);
         }
 
+        /// <summary>
+        /// Get dataset without given value
+        /// </summary>
+        /// <returns>Dataset without given value</returns>
         public static IEnumerable<T> Without<T>(this IEnumerable<T> source, T value)
         {
             List<T> result = new List<T>();

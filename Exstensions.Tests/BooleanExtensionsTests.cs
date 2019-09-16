@@ -27,6 +27,30 @@ namespace Exstensions.Tests
             Assert.AreEqual(2, value2);
         }
 
-       
+        [TestMethod]
+        public void ToBoolText()
+        {
+            var @true = true;
+            var @false = false;
+
+            Assert.AreEqual("Yes", @true.ToBoolText());
+            Assert.AreEqual("No", @false.ToBoolText());
+            Assert.AreEqual("1", @true.ToBoolText("1","0"));
+            Assert.AreEqual("0", @false.ToBoolText("1", "0"));
+        }
+
+
+        [TestMethod]
+        public void ToBoolTextCro()
+        {
+            var @true = true;
+            var @false = false;
+
+            Assert.AreEqual("Da", @true.ToBoolTextCro());
+            Assert.AreEqual("Ne", @false.ToBoolTextCro());
+            Assert.AreEqual("1", @true.ToBoolTextCro("1", "0"));
+            Assert.AreEqual("0", @false.ToBoolTextCro("1", "0"));
+        }
+
     }
 }
