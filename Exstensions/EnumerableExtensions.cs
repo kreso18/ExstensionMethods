@@ -91,7 +91,6 @@ namespace Exstensions
             return values.All(source.Contains);
         }
 
-
         /// <summary>
         /// Check if collection contains any of given values
         /// </summary>
@@ -99,6 +98,17 @@ namespace Exstensions
         public static bool ContainsAny<T>(this IEnumerable<T> source, params T[] values)
         {
             return values.Any(source.Contains);
+        }
+
+        public static IEnumerable<T> Without<T>(this IEnumerable<T> source, T value)
+        {
+            List<T> result = new List<T>();
+            foreach (T item in source.Where(x => !x.Equals(value)))
+            {
+                result.Add(item);
+            }
+
+            return result;
         }
     }
 }

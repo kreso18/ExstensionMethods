@@ -175,5 +175,24 @@ namespace Exstensions.Tests
             Assert.IsFalse(intFalse2);
 
         }
+
+        [TestMethod]
+        public void Without()
+        {
+            IEnumerable<string> stringDataset = new List<string> { "test1", "test2", "test3", "test4" };
+            IEnumerable<int> intDataset = new List<int> { 1, 2, 3, 4 };
+
+            Assert.IsTrue(intDataset.Without(4).Contains(1));
+            Assert.IsTrue(intDataset.Without(4).Contains(2));
+            Assert.IsTrue(intDataset.Without(4).Contains(3));
+            Assert.IsFalse(intDataset.Without(4).Contains(4));
+
+            Assert.IsTrue(stringDataset.Without("test4").Contains("test1"));
+            Assert.IsTrue(stringDataset.Without("test4").Contains("test2"));
+            Assert.IsTrue(stringDataset.Without("test4").Contains("test3"));
+            Assert.IsFalse(stringDataset.Without("test4").Contains("test4"));
+
+
+        }
     }
 }
