@@ -60,6 +60,24 @@ namespace Exstensions.Tests
         }
 
         [TestMethod]
+        public void Do()
+        {
+            IEnumerable<int> intList = new List<int>(){1,2,3,4};
+            List<int> squaredList = new List<int>();
+            List<int> squaredListToCompare = new List<int>();
+
+            foreach (var i in intList)
+            {
+                squaredListToCompare.Add(i*i);
+            }
+
+            intList.Do(item=>squaredList.Add(item*item));
+
+            CollectionAssert.AreEqual(squaredListToCompare, squaredList);
+        }
+
+
+        [TestMethod]
         public void WithMinimum()
         {
             var squareOfThreeOrIntMax = new Func<int, int>(x => x == 3 ? x * x : int.MaxValue);

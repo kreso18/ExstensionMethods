@@ -43,6 +43,20 @@ namespace Exstensions
         }
 
         /// <summary>
+        /// Do some job (Action) over dataset (sequence). Just call Do(action) on set of data instead of foreaching them
+        /// </summary>
+        public static void Do<T>(this IEnumerable<T> sequence, Action<T> action)
+        {
+            //Be careful, casting sequence to list (ToList()) can ruin performance because the method can be called over really big set of data
+            //sequence.ToList().ForEach(action);
+
+            foreach (T obj in sequence)
+            {
+                action(obj);
+            }
+        }
+
+        /// <summary>
         /// Get first item of sequence with minimum value by criterion
         /// Can be used as replacement for sequence.OrderBy(...).First();
         /// </summary>
