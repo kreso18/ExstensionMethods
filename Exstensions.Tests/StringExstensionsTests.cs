@@ -33,7 +33,7 @@ namespace Exstensions.Tests
         }
 
         [TestMethod]
-        public void GetBetween()
+        public void ExtractBetween()
         {
             string test1 = "This is <<placeholder>>";
             string test2 = "This is <<placeholder<> inside>>";
@@ -41,17 +41,36 @@ namespace Exstensions.Tests
             string test4 = "";
 
 
-            string result1 = test1.GetBetween("<<", ">>"); // return "placeholder";
-            string result2 = test2.GetBetween("<<", ">>"); // return "placeholder<> inside";
-            string result3 = test3.GetBetween("<<", ">>"); // return "";
-            string result4 = test4.GetBetween("<<", ">>"); // return "";
-            string result5 = test1.GetBetween("((", "))"); // return "";
+            string result1 = test1.ExtractBetween("<<", ">>"); // return "placeholder";
+            string result2 = test2.ExtractBetween("<<", ">>"); // return "placeholder<> inside";
+            string result3 = test3.ExtractBetween("<<", ">>"); // return "";
+            string result4 = test4.ExtractBetween("<<", ">>"); // return "";
+            string result5 = test1.ExtractBetween("((", "))"); // return "";
 
             Assert.AreEqual("placeholder", result1);
             Assert.AreEqual("placeholder<> inside", result2);
             Assert.AreEqual("", result3);
             Assert.AreEqual("", result4);
             Assert.AreEqual("", result5);
+        }
+
+        [TestMethod]
+        public void ExtractBetweenAtPosition()
+        {
+            string test1 = "a b {c} {d}";
+            string test2 = "This is <<placeholder<> inside>>";
+            string test3 = "This is empty placeholder <<>>";
+            string test4 = "";
+
+
+            string result1 = test1.ExtractBetweenAtPosition("{", "}", 1); // return "c";
+            string result2 = test1.ExtractBetweenAtPosition("{", "}", 2); // return "d";
+            string result3 = test1.ExtractBetweenAtPosition("{", "}", 3); // return "";
+       
+
+            Assert.AreEqual("c", result1);
+            Assert.AreEqual("d", result2);
+            Assert.AreEqual("", result3);
         }
     }
 }

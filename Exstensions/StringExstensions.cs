@@ -41,10 +41,10 @@ namespace Exstensions
         //}
 
         /// <summary>
-        /// Get the string between the two specified string.
+        /// Get the string between the two specified string (delimiters).
         /// </example>
-        /// <returns>The string between the two specified string.</returns>
-        public static string GetBetween(this string src, string left, string right)
+        /// <returns>The string between the two specified string or empty string if not found.</returns>
+        public static string ExtractBetween(this string src, string left, string right)
         {
             if (src.IsNullOrEmpty())
                 return string.Empty;
@@ -59,5 +59,32 @@ namespace Exstensions
             return src.Substring(startIndex, rightIndex - startIndex);
         }
 
+        /// <summary>
+        /// Get the string between the two specified string (delimiters) at given position.
+        /// </summary>
+        /// <returns>The string between the two specified string (delimiters) at given position or empty string if not found.</returns>
+        public static string ExtractBetweenAtPosition(this string value, string left, string right, int position = 1)
+        {
+            if (string.IsNullOrEmpty(value))
+                return String.Empty;
+
+            int start = -1;
+
+            // Find start at given position
+            for (int i = 1; i <= position; i++)
+                start = value.IndexOf(left, start + 1);
+
+            if (start < 0)
+                return string.Empty;
+            start += left.Length;
+
+            // Find End
+            int end = value.IndexOf(right, start);
+            if (end < 0)
+                return string.Empty;
+
+            var length = end - start;
+            return value.Substring(start, length);
+        }
     }
 }
