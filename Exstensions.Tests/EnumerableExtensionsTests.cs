@@ -62,16 +62,16 @@ namespace Exstensions.Tests
         [TestMethod]
         public void Do()
         {
-            IEnumerable<int> intList = new List<int>(){1,2,3,4};
+            IEnumerable<int> intList = new List<int>() { 1, 2, 3, 4 };
             List<int> squaredList = new List<int>();
             List<int> squaredListToCompare = new List<int>();
 
             foreach (var i in intList)
             {
-                squaredListToCompare.Add(i*i);
+                squaredListToCompare.Add(i * i);
             }
 
-            intList.Do(item=>squaredList.Add(item*item));
+            intList.Do(item => squaredList.Add(item * item));
 
             CollectionAssert.AreEqual(squaredListToCompare, squaredList);
         }
@@ -209,8 +209,17 @@ namespace Exstensions.Tests
             Assert.IsTrue(stringDataset.Without("test4").Contains("test2"));
             Assert.IsTrue(stringDataset.Without("test4").Contains("test3"));
             Assert.IsFalse(stringDataset.Without("test4").Contains("test4"));
+        }
 
+        [TestMethod]
+        public void HasDuplicates()
+        {
+            IEnumerable<string> containsDuplicates = new List<string> { "test1", "test2", "test3", "test4", "test1" };
+            IEnumerable<int> doesntContainsDuplicates = new List<int> { 1, 2, 3, 4 };
 
+            Assert.IsTrue(containsDuplicates.HasDuplicates());
+
+            Assert.IsFalse(doesntContainsDuplicates.HasDuplicates());
         }
     }
 }

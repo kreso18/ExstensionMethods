@@ -128,5 +128,17 @@ namespace Exstensions
 
             return result;
         }
+
+        /// <summary>
+        /// Check for duplicates [O(n)]
+        /// </summary>
+        /// <returns>True if given collection has duplicates</returns>
+        public static bool HasDuplicates<T>(this IEnumerable<T> source)
+        {
+            //Adding a value into the HashSet will return false when a duplicate value is inserted.This will cause the LINQ Any method to short circuit and complete the enumeration.
+            HashSet<T> knownElements = new HashSet<T>();
+
+            return source.Any(x => !knownElements.Add(x));
+        }
     }
 }
