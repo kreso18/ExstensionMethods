@@ -13,8 +13,6 @@ namespace Exstensions
         /// Check if given string is numeric
         /// </summary>
         /// <returns>True if string is numeric (only digits).</returns>
-
-
         public static bool IsNumeric(this string @this)
         {
             return !Regex.IsMatch(@this, "[^0-9]");
@@ -85,6 +83,16 @@ namespace Exstensions
 
             var length = end - start;
             return value.Substring(start, length);
+        }
+
+        /// <summary>
+        /// Check if a string is match with given regular expression pattern.
+        /// </summary>
+        /// <returns>True if string match with given regex, otherwise False</returns>
+        public static bool IsMatchRegex(this string value, string pattern)
+        {
+            Regex regex = new Regex(pattern);
+            return (regex.IsMatch(value));
         }
     }
 }

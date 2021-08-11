@@ -62,5 +62,64 @@ namespace Exstensions.Tests
             Assert.IsTrue("test1".IsIn("test1", "test2", "test3"));
             Assert.IsFalse("test0".IsIn("test1", "test2", "test3"));
         }
+
+        [TestMethod]
+        public void DeepClone()
+        {
+            var obj = new TestClass1()
+            {
+                IntProp = 1,
+                StringProp = "a",
+                ObjProp = new TestClass2
+                {
+                    IntProp = 2,
+                    StringProp = "b"
+                }
+            };
+
+            obj.SetPrivateIntProp(10);
+
+
+
+            var clonedObj = obj.DeepClone();
+
+            Assert.IsFalse(obj == clonedObj);
+            Assert.IsFalse(obj.Equals(clonedObj));
+            Assert.IsFalse(obj.GetHashCode() == clonedObj.GetHashCode());
+
+            Assert.AreEqual(obj.IntProp, clonedObj.IntProp);
+            Assert.AreEqual(obj.GetPrivateIntProp(), clonedObj.GetPrivateIntProp());
+            Assert.AreEqual(obj.StringProp, clonedObj.StringProp);
+            Assert.AreEqual(obj.ObjProp.IntProp, clonedObj.ObjProp.IntProp);
+            Assert.AreEqual(obj.ObjProp.StringProp, clonedObj.ObjProp.StringProp);
+
+        }
+    }
+
+    [Serializable()]
+    class TestClass1
+    {
+        public int IntProp { get; set; }
+        public string StringProp { get; set; }
+        public TestClass2 ObjProp { get; set; }
+
+        private int IntPropPrivate { get; set; }
+
+        public int GetPrivateIntProp()
+        {
+            return IntPropPrivate;
+        }
+
+        public void SetPrivateIntProp(int value)
+        {
+            IntPropPrivate = value;
+        }
+    }
+
+    [Serializable()]
+    class TestClass2
+    {
+        public int IntProp { get; set; }
+        public string StringProp { get; set; }
     }
 }

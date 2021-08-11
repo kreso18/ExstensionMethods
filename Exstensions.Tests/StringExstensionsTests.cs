@@ -72,5 +72,19 @@ namespace Exstensions.Tests
             Assert.AreEqual("d", result2);
             Assert.AreEqual("", result3);
         }
+
+        [TestMethod]
+        public void IsMatchRegex()
+        {
+            string test1 = "test";
+            string test2 = "test";
+            
+            bool result1 = test1.IsMatchRegex(@"[a-z]"); //True
+            bool result2 = test2.IsMatchRegex(@"[0-9]"); //False
+            
+            Assert.IsTrue(result1);
+            Assert.IsFalse(result2);
+
+        }
     }
 }
